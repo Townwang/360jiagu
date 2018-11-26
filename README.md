@@ -4,9 +4,9 @@
 
 # 使用方法
 
-1. 把pack-release.gradle拷贝至项目APP文件夹下
+1. 把jiagu.gradle拷贝至项目APP文件夹下
 
-2. 在bulid.gradle中 引入 apply from: 'pack-release.gradle'
+2. 在bulid.gradle中 引入 apply from: 'jiagu.gradle'
 
 3. 把jiagu文件夹拷贝至自己电脑并修改涉及到的路径
 

@@ -1,0 +1,27 @@
+//执行命令路径
+def shPath =  "D:/android/jiagu/jiagu.sh"
+//执行文件路径
+def jarPath = "D:/android/jiagu/jiagu.jar"
+//执行 打包程序
+task jiaguApk {
+    println("开始加固应用")
+    android.applicationVariants.all { variant ->
+        variant.assemble.doLast {
+            if (variant.buildType.name.contains('release')) {
+                def apkPath = variant.outputs.first().outputFile as File
+                exec {
+                    ignoreExitValue true
+                    commandLine "sh",shPath, apkPath, apkPath.getParent(),jarPath
+                }
+            }
+        }
+    }
+}
+//构建发布到生产环境的所有渠道apk,生成压缩文件
+task packageReleases{
+    dependsOn("assembleRelease")
+    doLast {
+        jiaguApk()
+        println("加固完毕")
+    }
+}
